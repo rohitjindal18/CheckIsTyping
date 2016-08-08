@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Check is Typing message</title>
+<script type="text/javascript">
+	var prevtime = 0;
+	var currentTime = 0;
+	var isFirst = false;
+	function typed() {
+		if(!isFirst){
+			prevtime = (new Date).getTime();
+			currentTime = prevtime;
+			isFirst = true;	
+		}
+		else {
+			prevtime = currentTime;
+			currentTime = (new Date).getTime();
+		}
+		if((currentTime - prevtime) > 250){
+			document.getElementById('checkmsg').innerHTML = "Someone is typing a message";
+		}	
+
+		if(document.getElementById('inputMsg').value.length == 0){
+			document.getElementById('checkmsg').innerHTML = "";
+		}	
+	}
+</script>
+<style type="text/css">
+	input {
+		width: 200px;
+		height: 40px;
+		background-color: green;
+		color: white;
+	}
+</style>
+</head>
+<body>
+	<div>
+		<input type="text" id="inputMsg" onkeyup="typed()" />
+		<span id ="checkmsg"></span>
+	</div>
+</body>
+</html>
